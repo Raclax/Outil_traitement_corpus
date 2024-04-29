@@ -1,13 +1,13 @@
 import requests
 from bs4 import BeautifulSoup as soup
 
-def find_pages(headers, url_base):
+def find_pages(url_base):
     
     page = 0
     lien = []
     while True:
         url = f"https://www.yelp.com/search?find_desc=Restaurants&find_loc=San+Francisco%2C+CA&start={page * 10}"
-        html = requests.get(url, headers=headers)
+        html = requests.get(url)
         #print(response.status_code)  
         resto = soup(html.text, 'html.parser')
 
@@ -23,9 +23,9 @@ def find_pages(headers, url_base):
         page += 1
     return lien
 
-def find_comms_stars (lst, headers):
+def find_comms_stars (lst):
     for url in lst :
-        html = requests.get(url, headers=headers)
+        html = requests.get(url)
         #print(response.status_code)  
         resto = soup(html.text, 'html.parser')
         reviews = resto.find_all("span", lang="en")
@@ -45,7 +45,7 @@ def main () :
     } """
     url_base = 'https://www.yelp.com'
 
-    lst_liens = find_pages(headers, url_base)
-    find_comms_stars(lst_liens, headers)
+    lst_liens = find_pages(url_base)
+    find_comms_stars(lst_liens)
 
 main()
