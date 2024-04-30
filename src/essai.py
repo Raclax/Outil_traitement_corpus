@@ -1,10 +1,35 @@
-itesmport requests
+"""
+Ce script permet de créer une liste de toutes les liens qui dirigent vers des pages d'articles amazon d'une certaine catégorie, ici books,
+à partir du lien "de base", puis qu'en extraire les noms des clients qui ont laissés un commentaire, 
+leur note et le texte du coimmentaire, pour le placer dans une liste de dictionnaires puis un CSV
+
+"""
+
+import requests
 from bs4 import BeautifulSoup as soup
 from time import sleep
 import csv
 
 def find_pages(url_base, headers):
     
+    """
+    Prends un url "de base" d'une page amazon et ressort une liste des urls des pages des produits de cette page.
+
+    Parameters
+    ----------
+    url_base : str
+        La première partie de l'url, qu'on va compléter avec les particularités de chaque url de pages
+    headers : dict
+        Le header qu'on va utiliser
+
+    Returns
+    -------
+    lien : list
+        une liste de strings qui correspond aux urls des pages des produits
+    
+    
+    """
+
     page = 0
     lien = []
     while page <=10:
@@ -25,7 +50,27 @@ def find_pages(url_base, headers):
         sleep(2)
     return lien
 
+
+
+
 def find_comms (lst, headers):
+
+    """
+    Prends une liste d'urls des pages d'un produit et ressort le pseudo, le commentaire et la note des personnes qui ont laissés une review.
+    
+    Parameters
+    ----------
+    lst : list
+        La liste des urls des pages 
+    headers : dict
+        Le header qu'on va utiliser
+
+    Returns
+    -------
+    tout : list
+        Liste de dictionnaires contenant les pseudos, les commentaires et les notes en str et en int.
+    """
+
     tout=[]
     for url in lst :
         html = requests.get(url, headers=headers)
@@ -45,7 +90,20 @@ def find_comms (lst, headers):
     return tout
 
 
+
+
 def to_csv (tout) :
+
+    """
+    Prends la liste de dictionnaires et crée un fichier csv.
+
+    Parameters
+    ----------
+    tout : list
+        La liste des dictionnaires contenant les infos des reviews 
+    
+    """
+
     titres = ['id', 'text', 'label', 'label_text']
 
     with open('dataset.csv', 'w', newline='') as file:
@@ -54,6 +112,9 @@ def to_csv (tout) :
 
         for row in tout:
             writer.writerow(row)
+
+
+
 
 def main():
     url_base = "https://www.amazon.fr"
