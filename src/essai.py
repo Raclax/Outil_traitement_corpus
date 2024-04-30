@@ -78,14 +78,15 @@ def find_comms (lst, headers):
         comms = soup(html.text, 'html.parser')
         #print(comms)
         comments = comms.find_all('span', {'class': 'a-size-base review-text review-text-content'})
-    ratings = comms.find_all('span', {'class': 'a-icon-alt'})
-    id = comms.find_all('span', {'class': 'a-profile-name'})
+        ratings = comms.find_all('span', {'class': 'a-icon-alt'})
+        id = comms.find_all('span', {'class': 'a-profile-name'})
 
-    for i in range (0, len(comments)):
-        tout.append({"Identifiant" : id[i],
-                    "Commentaire" : comments[i],
-                    "Note" : int(ratings[i]),
-                    "Note_str" : ratings[i]
+    for i in range (len(comments)):
+        if len (ratings)
+        tout.append({"Identifiant" : id[i].text.strip(),
+                    "Commentaire" : comments[i].text.strip(),
+                    "Note" : int(ratings[i].text.strop().split()[0]),
+                    "Note_str" : ratings[i].text.strop().split()[0]
                     })
     return tout
 
@@ -104,7 +105,7 @@ def to_csv (tout) :
     
     """
 
-    titres = ['id', 'text', 'label', 'label_text']
+    titres = ['Identifiant', 'Commentaire', 'Note', 'Note_str']
 
     with open('dataset.csv', 'w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=titres)
