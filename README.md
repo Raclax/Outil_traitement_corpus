@@ -6,7 +6,7 @@ J'ai décider que travailler sur de la classification pourrait être intéressan
 En l'occurence, j'ai choisi de travailler sur des reviews laissées par des internautes sur internet et la gradation, sur un système d'étoiles, qu'ils ont associés à leur commentaire.
 
 ## Le corpus
-J'ai trouvé plusieurs corpus qui pouvaient répondre à cette description, notamment issus de Yelp ou de Trivago, mais j'ai finalement choisi de partir avec le corpus <a href="https://huggingface.co/datasets/mteb/ amazon_reviews_multi">"amazon_reviews_multi"</a>. 
+J'ai trouvé plusieurs corpus qui pouvaient répondre à cette description, notamment issus de Yelp ou de Trivago, mais j'ai finalement choisi de partir avec le corpus <a href="https://huggingface.co/datasets/mteb/amazon_reviews_multi">"amazon_reviews_multi"</a>. 
 
 Il s'agit d'un corpus qui regroupe evniron 1 800 000 commentaires laissés sur le site Amazon, en anglais, allemand, français, espagnol, chinois ou japonais, associés à leur note /5. Chaque note (0, 1, 2, 3, 4) est associée à exactement 20% du corpus, sout environ 360 000 commentaires. Le dataset est réparti en train/dev/test : il contient 1 200 000 lignes destinées à l'entrainement, 30 000 pour la validation et 30 000 pour le test.
 
