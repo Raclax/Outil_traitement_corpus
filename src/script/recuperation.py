@@ -1,14 +1,12 @@
-"""CRéateur de dataset
+"""Créateur de dataset
 
-Ce script permet de récupérer toutes les pages articles à partir d'une 
-page principale d'amazon pour ensuite en extraire les reviews : le texte, l'id
-de la personne et la note associée.
+Ce script permet de récupérer toutes les pages articles à partir d'une page principale d'amazon pour ensuite en extraire les reviews : 
+le texte, l'id de la personne et la note associée.
 
 Ce script contient également one fonction pour transformer ces informations en un fichier CSV.
 
 A noter que bien qu'il devrait fonctionner en théorie, en pratique ce n'est pas le cas :
-Amazon fait en sorte que les données scrappées arrivent avec des soucis d'encodage et je 
-n'ai pas tu y trouver de solution.
+Amazon fait en sorte que les données scrappées arrivent avec des soucis d'encodage et je n'ai pas tu y trouver de solution.
 
 """
 
@@ -30,7 +28,7 @@ def find_pages(url_base, headers):
 
     Returns
     -------
-    - list : Une liste de chaînes contenant les URL des pages de détail des livres.
+    - list : Une liste de strings contenant les URL des pages de détail des livres.
 
     En plus :
     - Pause de 2 secondes entre chaque requête pour éviter le blocage par le serveur d'Amazon.
@@ -83,10 +81,11 @@ def find_comms (lst, headers):
         id = comms.find_all('span', {'class': 'a-profile-name'})
 
         for i in range (0, len(comments)):
-            tout.append({"Identifiant" : id[i],
-                    "Commentaire" : comments[i],
-                    "Note" : int(ratings[i]),
-                    "Note_str" : ratings[i]
+            if len (ratings) :
+                tout.append({"Identifiant" : id[i].text.strip(),
+                    "Commentaire" : comments[i].text.strip(),
+                    "Note" : int(ratings[i].text.strop().split()[0]),
+                    "Note_str" : ratings[i].text.strop().split()[0]
                     })
     return tout
 
@@ -98,15 +97,14 @@ def to_csv (tout) :
 
     Parameters
     ----------
-    - tout (list) : Liste des données à écrire dans le fichier CSV. Chaque élément de la liste est un dictionnaire
-                    représentant un commentaire et ses métadonnées associées.
+    - tout (list) : La liste des dictionnaires contenant les infos des reviews
 
     Returns
     -------
     - Crée un fichier 'dataset.csv' dans le répertoire de travail actuel et écrit les données dedans.
     """
     
-    titres = ['id', 'text', 'label', 'label_text']
+    titres = ['Identifiant', 'Commentaire', 'Note', 'Note_str']
 
     with open('dataset.csv', 'w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=titres)

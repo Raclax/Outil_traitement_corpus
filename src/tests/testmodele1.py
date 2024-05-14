@@ -1,4 +1,13 @@
-#from time import slip 
+"""Script test : récuếrer les donnéess sur une page
+
+Il s'agit d'un script intermédiaire, pour ovir comment la récupération des informations d'une page amazon peut être effectuée.
+
+Après avoir vu coimment cela fonctionnait pour une page, j'ai ajouté ce script à recuperation.py
+
+A noter que bien qu'il devrait fonctionner en théorie, en pratique ce n'est pas le cas :
+Amazon fait en sorte que les données scrappées arrivent avec des soucis d'encodage et je n'ai pas tu y trouver de solution.
+
+"""
 import requests
 from bs4 import BeautifulSoup as soup
 import csv
