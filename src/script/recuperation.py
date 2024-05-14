@@ -106,7 +106,7 @@ def to_csv (tout) :
     
     titres = ['Identifiant', 'Commentaire', 'Note', 'Note_str']
 
-    with open('dataset.csv', 'w', newline='') as file:
+    with open('../../figures/dataset.csv', 'w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=titres)
         writer.writeheader()
 
