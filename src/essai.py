@@ -82,8 +82,8 @@ def find_comms (lst, headers):
         id = comms.find_all('span', {'class': 'a-profile-name'})
 
     for i in range (len(comments)):
-        if len (ratings)
-        tout.append({"Identifiant" : id[i].text.strip(),
+        if len (ratings) :
+            tout.append({"Identifiant" : id[i].text.strip(),
                     "Commentaire" : comments[i].text.strip(),
                     "Note" : int(ratings[i].text.strop().split()[0]),
                     "Note_str" : ratings[i].text.strop().split()[0]
