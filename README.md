@@ -50,4 +50,7 @@ Ensuite j'ai effectué le calcule de la corrélation et de la p value entre la l
 
 On élimine ensuite les valeurs abérantes, on augmente les données (cellule un peu longue à faire tourner vu que le corpus est déjà bien fourni) en utilisant des synonymes et en concaténant les nouveaus éléments aux anciens. ON arrive à un corpus à peu près deux fois plus long. On sépare ensuite en train et test (80/20).
 
-Enfin, comme dernière mesure, on va essayer de comparer les entités nomées les plus récurentes en fonction du label.
+Enfin, comme dernière mesure, on peut de comparer les 10 entités nomées les plus récurentes en fonction du label. Ca peut être une métrique intéressante pour voir si les textes de chaque labels sont bien en accord avec ce dernier. Et ça a l'air d'être le cas. 
+Pour pouvoir réaliser cette dernière mesure, j'ai du réduire le corpus à seulement les commentaires en français (pour pouvoir mieux comprendre les résultats), puis réduire la taille de l'échentillon à 1 000 000 tokens, puisque c'est la limite maximale pour Spacy.
+J'ai ajouté la fréquence d'apparition de chaque entité nomée à chaque fois, pour montrer que ces résultats ne sont peut être pas représentatifs de tout le corpus.
+N. B. : lors du premier essai, ceux qui ressortaient le plus étaient "amazon", "Amazon", et "AMAZON". J'ai donc décidé de les retirer puisqu'ils ne sont pas vraiment intéressants pour notre analyse.
